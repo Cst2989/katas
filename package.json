@@ -1,0 +1,27 @@
+{
+  "name": "katas",
+  "version": "1.0.0",
+  "description": "A project to practice katas",
+  "main": "index.js",
+  "author": "Neciu Dan",
+  "license": "MIT",
+  "scripts": {
+      "cli": "ts-node src/cli.ts",
+      "test": "jest",
+      "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+      "build": "tsc -p tsconfig.json",
+      "clean": "rm -rf dist build",
+      "ts-node": "ts-node"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.10.3",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.2.4",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
