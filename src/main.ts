@@ -50,7 +50,7 @@ export const totalScore = (FrameScoreCard: [number, number][]): number => {
   return score;
 };
 
-export const game = (Rolls: number[]): number => {
+export const bowlingScore = (Rolls: number[]): number => {
   const FrameScoreCard = listToMatrix(Rolls);
   // verify the end of the game
   return totalScore(FrameScoreCard);

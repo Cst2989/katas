@@ -1,9 +1,9 @@
-import { frame, totalScore, game } from './main';
+import { frame, totalScore, bowlingScore } from './main';
 
 describe('bowlingScore error boundaries', () => {
   test('it should return error message for too few rolls', () => {
     const inputRolls = [1, 2, 3]; // ARRANGE
-    const gameScore = game(inputRolls); // ACT
+    const gameScore = bowlingScore(inputRolls); // ACT
     expect(gameScore).toBe('Invalid rolls input'); // ASSERT
   });
   test('it should return error message for too many rolls', () => {
@@ -12,60 +12,60 @@ describe('bowlingScore error boundaries', () => {
       22, 23,
     ]; // ARRANGE
 
-    const gameScore = game(inputRolls); // ACT
+    const gameScore = bowlingScore(inputRolls); // ACT
     expect(gameScore).toBe('Invalid rolls input'); // ASSERT
   });
   test('it should return error message if negative numbers', () => {
     const inputRolls = [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, -19, 20,
     ]; // ARRANGE
-    const gameScore = game(inputRolls); // ACT
+    const gameScore = bowlingScore(inputRolls); // ACT
     expect(gameScore).toBe('Invalid rolls input'); // ASSERT
   });
   test('it should return error message non-zero number after strike', () => {
     const inputRolls = [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 10, 2, 20,
     ];
-    const gameScore = game(inputRolls);
+    const gameScore = bowlingScore(inputRolls);
     expect(gameScore).toBe(0);
   });
   test('it should return error message sum in frame is bigger than 10', () => {
     const inputRolls = [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 10, 2, 20,
     ];
-    const gameScore = game(inputRolls);
+    const gameScore = bowlingScore(inputRolls);
     expect(gameScore).toBe(0);
   });
 });
 
 describe('Game function', () => {
   test('it should return 0 for only zero rolls', () => {
-    const gameScore = game([
+    const gameScore = bowlingScore([
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ]);
     expect(gameScore).toBe(0);
   });
   test('it should return correct score when last frame is a strike', () => {
-    const gameScore = game([
+    const gameScore = bowlingScore([
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 5, 2,
     ]);
     expect(gameScore).toBe(17);
   });
   test('it should return correct score when last frame is a spare', () => {
-    const gameScore = game([
+    const gameScore = bowlingScore([
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 2,
     ]);
     expect(gameScore).toBe(12);
   });
 
   test('All strikes should have correct score ', () => {
-    const gameScore = game([
+    const gameScore = bowlingScore([
       10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 10, 10,
     ]);
     expect(gameScore).toBe(300);
   });
   test('Complex numbers ', () => {
-    const gameScore = game([
+    const gameScore = bowlingScore([
       5,
       4, // 9
       8,
