@@ -28,12 +28,8 @@ export const calculateFrame = (
 };
 
 export const totalScore = (FrameScoreCard: [number, number][]): number => {
-  let scoreArray: any = [];
+  let scoreArray: any = bowlingScoreCard(FrameScoreCard);
   let score: number = 0;
-  FrameScoreCard.forEach((frameRoll) => {
-    const frameScore = calculateFrame(frameRoll[0], frameRoll[1]);
-    scoreArray.push(frameScore);
-  });
 
   for (let index = 0; index < 10; index++) {
     let roundScore = scoreArray[index];
