@@ -10,25 +10,34 @@
 // In the tenth frame, a player who rolls a spare or strike is allowed to roll the extra balls to complete the frame.
 // However no more than three balls can be rolled in the tenth frame
 
-export const frame = (rollOne: number, rollTwo: number): number | string => {
+export const calculateFrame = (
+  rollOne: number,
+  rollTwo: number
+): number | string => {
   if (rollOne === 10) {
+    if (rollTwo !== 0) {
+      return 'Invalid frame input';
+    }
     return 'X';
   }
   let score = rollOne + rollTwo;
-  return score === 10 ? 'S' : score;
+  if (score > 10) {
+    return 'Invalid frame input';
+  }
+  return score === 10 ? '/' : score;
 };
 
 export const totalScore = (FrameScoreCard: [number, number][]): number => {
   let scoreArray: any = [];
   let score: number = 0;
   FrameScoreCard.forEach((frameRoll) => {
-    const frameScore = frame(frameRoll[0], frameRoll[1]);
+    const frameScore = calculateFrame(frameRoll[0], frameRoll[1]);
     scoreArray.push(frameScore);
   });
 
   for (let index = 0; index < 10; index++) {
     let roundScore = scoreArray[index];
-    if (roundScore === 'S') {
+    if (roundScore === '/') {
       // handle Spare
       roundScore = 10 + FrameScoreCard[index + 1][0];
     }
@@ -50,7 +59,14 @@ export const totalScore = (FrameScoreCard: [number, number][]): number => {
   return score;
 };
 
-export const bowlingScore = (Rolls: number[]): number => {
+export const bowlingScore = (Rolls: number[]): number | string => {
+  if (
+    Rolls.length < 20 ||
+    Rolls.length > 21 ||
+    Rolls.some((roll) => roll < 0)
+  ) {
+    return 'Invalid rolls input';
+  }
   const FrameScoreCard = listToMatrix(Rolls);
   // verify the end of the game
   return totalScore(FrameScoreCard);
@@ -71,4 +87,14 @@ const listToMatrix = (list: number[]) => {
   }
 
   return matrix;
+};
+
+export const bowlingScoreCard = (frames: number[][]): string => {
+  let scoreCard = '';
+
+  frames.forEach((frameRolls) => {
+    const frameResult = calculateFrame(frameRolls[0], frameRolls[1]);
+    scoreCard += frameResult;
+  });
+  return scoreCard;
 };
