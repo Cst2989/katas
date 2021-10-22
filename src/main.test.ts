@@ -53,7 +53,7 @@ describe('bowlingScore function', () => {
 
   test('All strikes should have correct score ', () => {
     const gameScore = bowlingScore([
-      10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 10, 10,
+      10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10,
     ]);
     expect(gameScore).toBe(300);
   });

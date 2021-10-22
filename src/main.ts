@@ -47,7 +47,11 @@ export const totalScore = (FrameScoreCard: [number, number][]): number => {
         FrameScoreCard[index + 1][1] || FrameScoreCard[index + 1][0] !== 10
           ? FrameScoreCard[index + 1][1]
           : futurePoint;
-      roundScore = 10 + FrameScoreCard[index + 1][0] + nextPoint;
+      if (nextPoint) {
+        roundScore = 10 + FrameScoreCard[index + 1][0] + nextPoint;
+      } else {
+        roundScore = 10 + FrameScoreCard[index + 1][0];
+      }
     }
     score = score + parseInt(roundScore);
   }
